@@ -59,7 +59,7 @@ public class SpringSecurity {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000")); // Whitelist Next.js
+        config.setAllowedOrigins(List.of("http://localhost:3000","https://jwt-auth-next-spring-boot.vercel.app/" )); // Whitelist dev url and deployed frontend url
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Content-Type", "Authorization"));
         config.setAllowCredentials(true);
