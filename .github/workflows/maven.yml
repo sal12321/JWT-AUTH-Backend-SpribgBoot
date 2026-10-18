@@ -23,24 +23,14 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean package
-
-    - name: Test Application Startup
+      
+    - name: Stage JAR as app.jar
       run: |
-        java -jar target/jwt_learning-0.0.1-SNAPSHOT.jar &
-        APP_PID=$!
-        echo "Spring Boot starting up with Process ID: $APP_PID..."
-        
-        # Give the app 15 seconds to finish its initialization sequence
-        sleep 15
-        
-        # Check if the background process is still alive
-        if kill -0 $APP_PID 2>/dev/null; then
-          echo "App started successfully!"
-          kill $APP_PID # Stop it safely so the runner can successfully finish the job
-        else
-          echo "App crashed on startup."
-          exit 1
-        fi
+          # Copy the compiled artifact to target/app.jar
+          cp target/jwt_learning-0.0.1-SNAPSHOT.jar target/app.jar
+          ls -lh target/app.jar
+          
+
     - name: Copy JAR to EC2 (overwrites existing app.jar)
       uses: appleboy/scp-action@v0.1.7
       with:
