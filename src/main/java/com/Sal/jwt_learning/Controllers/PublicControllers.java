@@ -27,10 +27,7 @@ public class PublicControllers {
     }
 
     @GetMapping("/hello")
-    public ResponseEntity<String> getCurrentUser() throws Exception {
-
-
-
+    public ResponseEntity<String> hello() throws Exception {
 
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
